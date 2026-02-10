@@ -1,4 +1,5 @@
 local activeClasses = require("./data/activeClasses")
+local vector2 = require("./classes/vector2")
 
 local lovework = {
 	core = {},
@@ -14,7 +15,7 @@ local lovework = {
 		debug = require("./utils/debug"),
 	},
 
-	vector2 = require("./classes/vector2"),
+	vector2 = vector2,
 
 	version = "0.1.0",
 }
@@ -65,5 +66,7 @@ function lovework.core.draw()
 		end
 	end
 end
+
+export type vector2 = vector2.Vector2
 
 return lovework
