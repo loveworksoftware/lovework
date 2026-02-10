@@ -1,3 +1,4 @@
+local class = require("./class")
 local activeClasses = require("./data/activeClasses")
 local vector2 = require("./classes/vector2")
 local input = require("./input")
@@ -9,7 +10,7 @@ local lovework = {
 		_systems = {},
 	},
 
-	class = require("./class"),
+	class = class,
 	input = input,
 
 	utils = {
@@ -72,5 +73,6 @@ function lovework.core.draw()
 end
 
 export type vector2 = vector2.Vector2
+export type baseClass = class.Base
 
 return lovework
