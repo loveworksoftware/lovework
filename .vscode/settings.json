@@ -1,0 +1,13 @@
+{
+	"luau-lsp.require.mode": "relativeToFile",
+	"luau-lsp.types.definitionFiles": ["globals.d.luau"],
+	"luau-lsp.platform.type": "standard",
+	"luau-lsp.sourcemap.enabled": false,
+	"luau-lsp.server.path": "",
+	"luau-lsp.sourcemap.rojoPath": "",
+	"luau-lsp.server.baseLuaurc": "",
+	"[luau]": {
+		"editor.defaultFormatter": "JohnnyMorganz.stylua",
+		"editor.formatOnSave": true
+	}
+}

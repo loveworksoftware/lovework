@@ -1,4 +1,4 @@
-# Lovework 0.1.0
+# Lovework 0.1.1
 Easy-to-use Kaledis framework.
 
 ## Requirements:
@@ -63,6 +63,14 @@ end
 function love.draw()
 	-- This will run every time a new frame will be drawn
 	lovework.core.draw()
+end
+
+function love.keypressed(key)
+    lovework.input.keyPressed(key)
+end
+
+function love.keyreleased(key)
+    lovework.input.keyReleased(key)
 end
 
 ```

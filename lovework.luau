@@ -1,5 +1,6 @@
 local activeClasses = require("./data/activeClasses")
 local vector2 = require("./classes/vector2")
+local input = require("./input")
 
 local lovework = {
 	core = {},
@@ -9,16 +10,17 @@ local lovework = {
 	},
 
 	class = require("./class"),
+	input = input,
 
 	utils = {
 		timer = require("./utils/timer"),
 		debug = require("./utils/debug"),
-		viewport = require("./utils/viewport")
+		viewport = require("./utils/viewport"),
 	},
 
 	vector2 = vector2,
 
-	version = "0.1.0",
+	version = "0.1.1",
 }
 
 function lovework.systems.add(whenToCall: "draw" | "update", name: string, system: (dt: number?) -> ())
@@ -40,6 +42,7 @@ end
 
 function lovework.core.update(dt: number)
 	lovework.utils.timer.update(dt)
+	input.beginFrame()
 
 	for i, v in activeClasses do
 		if v.Update then
