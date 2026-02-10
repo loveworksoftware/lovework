@@ -13,6 +13,7 @@ local lovework = {
 	utils = {
 		timer = require("./utils/timer"),
 		debug = require("./utils/debug"),
+		viewport = require("./utils/viewport")
 	},
 
 	vector2 = vector2,
