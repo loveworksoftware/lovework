@@ -1,13 +1,12 @@
-local lovework = require("@lovework/lovework")
-local vector2 = lovework.vector2
+local vector2 = require("../classes/vector2")
 
 local viewport = {}
 
-function viewport.getViewportSize(): lovework.vector2
+function viewport.getViewportSize(): vector2.Vector2
 	return vector2.new(love.graphics.getDimensions())
 end
 
-function viewport.getViewportCenter(): lovework.vector2
+function viewport.getViewportCenter(): vector2.Vector2
 	local viewportSize = viewport.getViewportSize()
 
 	return viewportSize / 2
