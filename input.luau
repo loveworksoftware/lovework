@@ -8,7 +8,9 @@ local input = {
 	_keyPressedSignals = {}, -- internal
 }
 
-function input.getKeyPressedEvent(keyName: string): signal.Signal<>
+local inputImpl = {}
+
+function inputImpl.getKeyPressedEvent(keyName: string): signal.Signal<>
 	local sig = input._keyPressedSignals[keyName]
 
 	if not sig then
@@ -19,12 +21,12 @@ function input.getKeyPressedEvent(keyName: string): signal.Signal<>
 	return sig
 end
 
-function input.beginFrame()
+function inputImpl.beginFrame()
 	input.pressed = {}
 	input.released = {}
 end
 
-function input.keyPressed(key)
+function inputImpl.keyPressed(key)
 	input.down[key] = true
 	input.pressed[key] = true
 
@@ -34,21 +36,21 @@ function input.keyPressed(key)
 	end
 end
 
-function input.keyReleased(key)
+function inputImpl.keyReleased(key)
 	input.down[key] = nil
 	input.released[key] = true
 end
 
-function input.isDown(key)
+function inputImpl.isDown(key)
 	return input.down[key] == true
 end
 
-function input.wasPressed(key)
+function inputImpl.wasPressed(key)
 	return input.pressed[key] == true
 end
 
-function input.wasReleased(key)
+function inputImpl.wasReleased(key)
 	return input.released[key] == true
 end
 
-return input
+return inputImpl
