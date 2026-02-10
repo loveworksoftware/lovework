@@ -1,0 +1,69 @@
+local activeClasses = require("./data/activeClasses")
+
+local lovework = {
+	core = {},
+
+	systems = {
+		_systems = {},
+	},
+
+	class = require("./class"),
+
+	utils = {
+		timer = require("./utils/timer"),
+		debug = require("./utils/debug"),
+	},
+
+	vector2 = require("./classes/vector2"),
+
+	version = "0.1.0",
+}
+
+function lovework.systems.add(whenToCall: "draw" | "update", name: string, system: (dt: number?) -> ())
+	if lovework.systems._systems[name] then
+		error("system already exists!")
+	end
+	lovework.systems._systems[name] = {
+		run = system,
+		type = whenToCall,
+	}
+end
+
+function lovework.systems.remove(name: string)
+	if not lovework.systems._systems[name] then
+		error("system doesn't exist! no system to remove!")
+	end
+	lovework.systems._systems[name] = nil
+end
+
+function lovework.core.update(dt: number)
+	lovework.utils.timer.update(dt)
+
+	for i, v in activeClasses do
+		if v.Update then
+			v:Update(dt)
+		end
+	end
+
+	for i, v in lovework.systems._systems do
+		if v.type == "update" then
+			v.run(dt)
+		end
+	end
+end
+
+function lovework.core.draw()
+	for i, v in activeClasses do
+		if v.Draw then
+			v:Draw()
+		end
+	end
+
+	for i, v in lovework.systems._systems do
+		if v.type == "draw" then
+			v.run()
+		end
+	end
+end
+
+return lovework
