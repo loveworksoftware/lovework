@@ -2,6 +2,7 @@ local class = require("./class")
 local activeClasses = require("./data/activeClasses")
 local vector2 = require("./classes/vector2")
 local input = require("./input")
+local anim8 = require("./libraries/anim8")
 
 local lovework = {
 	core = {},
@@ -12,6 +13,7 @@ local lovework = {
 
 	class = class,
 	input = input,
+	animation = anim8,
 
 	utils = {
 		timer = require("./utils/timer"),
