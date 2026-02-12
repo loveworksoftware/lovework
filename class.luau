@@ -52,8 +52,21 @@ local _Class = setmetatable({}, {
 			end
 		end
 		Meta.__newindex = function(self, Index, Value)
-			if rawget(self, "__inherited") and (rawget(self, "__inherited") :: any)[Index] ~= nil then
-				(rawget(self, "__inherited") :: any)[Index] = Value
+			local inherited = rawget(self, "__inherited")
+
+			if Value == nil then
+				if inherited and rawget(inherited, Index) ~= nil then
+					inherited[Index] = nil
+				else
+					if rawget(self, Index) ~= nil then
+						rawset(self, Index, nil)
+					end
+				end
+				return
+			end
+
+			if inherited and rawget(inherited, Index) ~= nil then
+				inherited[Index] = Value
 			else
 				rawset(self, Index, Value)
 			end
