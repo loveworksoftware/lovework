@@ -76,5 +76,8 @@ end
 
 export type vector2 = vector2.Vector2
 export type baseClass = class.Base
+export type anim8 = anim8.Anim8
+export type grid = anim8.Grid
+export type animation = anim8.Animation
 
 return lovework
