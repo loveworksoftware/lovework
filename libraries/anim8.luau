@@ -1,4 +1,52 @@
-local anim8 = {
+export type Grid = {
+	frameWidth: number,
+	frameHeight: number,
+	imageWidth: number,
+	imageHeight: number,
+	left: number,
+	top: number,
+	border: number,
+	width: number,
+	height: number,
+	_key: string,
+	getFrames: (self: Grid, ...string | number) -> {Quad},
+}
+
+export type Animation = {
+	frames: {Quad},
+	durations: {number},
+	intervals: {number},
+	totalDuration: number,
+	onLoop: ((self: Animation, loops: number) -> ()) | string,
+	timer: number,
+	position: number,
+	status: "playing" | "paused",
+	flippedH: boolean,
+	flippedV: boolean,
+	clone: (self: Animation) -> Animation,
+	flipH: (self: Animation) -> Animation,
+	flipV: (self: Animation) -> Animation,
+	update: (self: Animation, dt: number) -> (),
+	pause: (self: Animation) -> (),
+	gotoFrame: (self: Animation, position: number) -> (),
+	pauseAtEnd: (self: Animation) -> (),
+	pauseAtStart: (self: Animation) -> (),
+	resume: (self: Animation) -> (),
+	draw: (self: Animation, image: Drawable | Texture, x: number?, y: number?, r: number?, sx: number?, sy: number?, ox: number?, oy: number?, kx: number?, ky: number?) -> (),
+	getFrameInfo: (self: Animation, x: number?, y: number?, r: number?, sx: number?, sy: number?, ox: number?, oy: number?, kx: number?, ky: number?) -> (Quad, number?, number?, number?, number?, number?, number?, number?, number?, number?),
+	getDimensions: (self: Animation) -> (number, number),
+}
+
+export type Anim8 = {
+	_VERSION: string,
+	_DESCRIPTION: string,
+	_URL: string,
+	_LICENSE: string,
+	newGrid: (frameWidth: number, frameHeight: number, imageWidth: number, imageHeight: number, left: number?, top: number?, border: number?) -> Grid,
+	newAnimation: (frames: {Quad}, durations: number | {[string | number]: number}, onLoop: ((self: Animation, loops: number) -> ()) | string?) -> Animation,
+}
+
+local anim8: Anim8 = {
 	_VERSION = "anim8 v2.3.1",
 	_DESCRIPTION = "An animation library for LÖVE",
 	_URL = "https://github.com/kikito/anim8",
@@ -105,7 +153,7 @@ local Gridmt = {
 	__call = Grid.getFrames,
 }
 
-local function newGrid(frameWidth, frameHeight, imageWidth, imageHeight, left, top, border)
+local function newGrid(frameWidth: number, frameHeight: number, imageWidth: number, imageHeight: number, left: number?, top: number?, border: number?): Grid
 	assertPositiveInteger(frameWidth, "frameWidth")
 	assertPositiveInteger(frameHeight, "frameHeight")
 	assertPositiveInteger(imageWidth, "imageWidth")
@@ -132,7 +180,7 @@ local function newGrid(frameWidth, frameHeight, imageWidth, imageHeight, left, t
 		},
 		Gridmt
 	)
-	return grid
+	return grid :: Grid
 end
 
 -----------------------------------------------------------
@@ -188,7 +236,7 @@ end
 local Animationmt = { __index = Animation }
 local nop = function() end
 
-local function newAnimation(frames, durations, onLoop)
+local function newAnimation(frames: {Quad}, durations: number | {[string | number]: number}, onLoop: ((Animation, number) -> ()) | string?): Animation
 	local td = type(durations)
 	if (td ~= "number" or durations <= 0) and td ~= "table" then
 		error("durations must be a positive number. Was " .. tostring(durations))
@@ -207,7 +255,7 @@ local function newAnimation(frames, durations, onLoop)
 		status = "playing",
 		flippedH = false,
 		flippedV = false,
-	}, Animationmt)
+	}, Animationmt) :: Animation
 end
 
 function Animation:clone()
