@@ -23,7 +23,7 @@ local lovework = {
 
 	vector2 = vector2,
 
-	version = "0.1.3",
+	version = "0.1.4",
 }
 
 function lovework.systems.add(whenToCall: "draw" | "update", name: string, system: (dt: number?) -> ())

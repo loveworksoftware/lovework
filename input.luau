@@ -91,9 +91,6 @@ end
 function inputImpl.beginFrame()
 	input.pressed = {}
 	input.released = {}
-	input._mousePressedSignals = {}
-	input._mouseReleasedSignals = {}
-	input._mouseScrollSignal = nil
 end
 
 function inputImpl.keyPressed(key)
