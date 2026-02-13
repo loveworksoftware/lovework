@@ -1,4 +1,5 @@
 local signal = require("@packages/signal")
+local vector2 = require("./classes/vector2")
 
 export type MouseButton = "1" | "2" | "3" | "left" | "right" | "middle"
 
@@ -27,6 +28,11 @@ local input = {
 }
 
 local inputImpl = {}
+
+function inputImpl.getMousePosition(): vector2
+	local x, y = love.mouse.getPosition()
+	return vector2.new(x, y)
+end
 
 function inputImpl.getKeyPressedEvent(keyName: string): signal.Signal<>
 	local sig = input._keyPressedSignals[keyName]
