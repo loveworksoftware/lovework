@@ -106,7 +106,7 @@ end
 
 function myClass:Destroy()
     self.maid:Destroy() -- automatically given to you by lovework.class
-    self._destroy() -- automatically given to you by lovework.class
+    self:_destroy() -- automatically given to you by lovework.class
 end
 
 export type myClass = lovework.class.Base & {
@@ -150,7 +150,7 @@ end
 
 function myOtherClass:Destroy()
     self.maid:Destroy() -- automatically given to you by lovework.class
-    self._destroy() -- automatically given to you by lovework.class
+    self:_destroy() -- automatically given to you by lovework.class
 end
 
 export type myOtherClass = myClass & {
