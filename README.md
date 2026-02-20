@@ -28,6 +28,7 @@ To your .luaurc aliases.
 ## Project Structure
 Lovework isn't too strict about this, but usually you'd want a structure like:
 
+```mdx
 project/
 ├── src/
 │   ├── main.luau
@@ -46,6 +47,7 @@ project/
 │       └── ...
 └── assets/
     └── ...
+```
 
 # Examples
 
